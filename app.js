@@ -22,5 +22,12 @@ require('./src/routes/findPokemonByPk')(app)
 require('./src/routes/createPokemon')(app)
 require('./src/routes/updatePokemon')(app)
 require('./src/routes/deletePokemon')(app)
+require('./src/routes/login')(app)
+
+// Gestion des erreurs
+app.use(({res}) => {
+ const message = 'Impossible de trouver la ressources demandée ! Vous pouvez essayer une autre URL.'
+ res.status(404).json({message})
+})
 
 app.listen(port, () => console.log(`Notre application est démarrée sur : http://localhost:${port}`))
