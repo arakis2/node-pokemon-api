@@ -6,12 +6,9 @@ const bcrypt = require('bcryptjs')
 
 let sequelize
 if(process.env.NODE_ENV === 'production'){
-  sequelize = new Sequelize('pokedex', 'root', '', {
+  sequelize = new Sequelize('test', '34285JFDwmEM7Xa.root', 'emYE7iWqZ3DjiK7R', {
     host: 'gateway01.ap-southeast-1.prod.aws.tidbcloud.com',
     port: 4000,
-    user: '34285JFDwmEM7Xa.root',
-    password: 'emYE7iWqZ3DjiK7R',
-    database: 'test',
     ssl: {
     minVersion: 'TLSv1.2',
     rejectUnauthorized: true
