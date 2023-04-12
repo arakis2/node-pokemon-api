@@ -15,6 +15,9 @@ if(process.env.NODE_ENV.trim() === 'production'){
     },
     dialect: 'mysql',
     dialectModule: require('mysql2'),
+    dialectOptions: {
+      timeout: 6000,
+    },
     logging: true
   })
 } else {
