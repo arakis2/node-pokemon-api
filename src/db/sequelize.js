@@ -16,7 +16,7 @@ if(process.env.NODE_ENV === 'production'){
     minVersion: 'TLSv1.2',
     rejectUnauthorized: true
   },
-    dialect: 'mysql2',
+    dialect: 'mysql',
     dialectOptions: {
       timezone: 'Etc/GMT-2',
     },
