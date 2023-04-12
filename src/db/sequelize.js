@@ -14,6 +14,7 @@ if(process.env.NODE_ENV.trim() === 'production'){
     rejectUnauthorized: true
     },
     dialect: 'mysql',
+    dialectModule: require('mysql2'),
     logging: true
   })
 } else {
