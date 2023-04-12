@@ -9,15 +9,13 @@ if(process.env.NODE_ENV.trim() === 'production'){
   sequelize = new Sequelize('test', '34285JFDwmEM7Xa.root', 'emYE7iWqZ3DjiK7R', {
     host: 'gateway01.ap-southeast-1.prod.aws.tidbcloud.com',
     port: 4000,
+    connectTimeout: 30000
     ssl: {
     minVersion: 'TLSv1.2',
     rejectUnauthorized: true
     },
     dialect: 'mysql',
     dialectModule: require('mysql2'),
-    dialectOptions: {
-      timeout: 6000,
-    },
     logging: true
   })
 } else {
@@ -31,6 +29,7 @@ if(process.env.NODE_ENV.trim() === 'production'){
   })
 
 }
+
 const Pokemon = PokemonModel(sequelize, DataTypes)
 const User = UserModel(sequelize, DataTypes)
   
