@@ -5,18 +5,15 @@ const pokemons = require('./mock-pokemon')
 const bcrypt = require('bcryptjs')
 
 let sequelize
-if(process.env.NODE_ENV === 'production'){
+if(process.env.NODE_ENV.trim() === 'production'){
   sequelize = new Sequelize('test', '34285JFDwmEM7Xa.root', 'emYE7iWqZ3DjiK7R', {
     host: 'gateway01.ap-southeast-1.prod.aws.tidbcloud.com',
     port: 4000,
     ssl: {
     minVersion: 'TLSv1.2',
     rejectUnauthorized: true
-  },
-    dialect: 'mysql',
-    dialectOptions: {
-      timezone: 'Etc/GMT-2',
     },
+    dialect: 'mysql',
     logging: true
   })
 } else {
@@ -28,8 +25,8 @@ if(process.env.NODE_ENV === 'production'){
     },
     logging: false
   })
+
 }
-  
 const Pokemon = PokemonModel(sequelize, DataTypes)
 const User = UserModel(sequelize, DataTypes)
   
