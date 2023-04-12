@@ -2,10 +2,11 @@ const { Sequelize, DataTypes } = require('sequelize')
 const PokemonModel = require('../models/pokemon')
 const UserModel = require('../models/user')
 const pokemons = require('./mock-pokemon')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
+let sequelize
 if(process.env.NODE_ENV === 'production'){
-  const sequelize = new Sequelize('pokedex', 'root', '', {
+  sequelize = new Sequelize('pokedex', 'root', '', {
     host: 'localhost',
     dialect: 'mariadb',
     dialectOptions: {
@@ -14,7 +15,7 @@ if(process.env.NODE_ENV === 'production'){
     logging: true
   })
 } else {
-  const sequelize = new Sequelize('pokedex', 'root', '', {
+  sequelize = new Sequelize('pokedex', 'root', '', {
     host: 'localhost',
     dialect: 'mariadb',
     dialectOptions: {
@@ -23,7 +24,6 @@ if(process.env.NODE_ENV === 'production'){
     logging: false
   })
 }
-
   
 const Pokemon = PokemonModel(sequelize, DataTypes)
 const User = UserModel(sequelize, DataTypes)
