@@ -6,17 +6,14 @@ const bcrypt = require('bcryptjs')
 
 let sequelize
 if(process.env.NODE_ENV.trim() === 'production'){
-  sequelize = new Sequelize('test', '34285JFDwmEM7Xa.root', 'emYE7iWqZ3DjiK7R', {
-    host: 'gateway01.ap-southeast-1.prod.aws.tidbcloud.com',
-    port: 4000,
-    connectTimeout: 30000,
-    ssl: {
-    minVersion: 'TLSv1.2',
-    rejectUnauthorized: true
+  sequelize = new Sequelize('pokedex', 'root', '', {
+    host: 'mariadb',
+    port: 3020,
+    dialect: 'mariadb',
+    dialectOptions: {
+      timezone: 'Etc/GMT-2',
     },
-    dialect: 'mysql',
-    dialectModule: require('mysql2'),
-    logging: true
+    logging: false
   })
 } else {
   sequelize = new Sequelize('pokedex', 'root', '', {

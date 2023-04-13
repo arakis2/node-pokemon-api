@@ -1,0 +1,46 @@
+version: '3.4'
+
+services:
+  nodepokemonapi:
+    image: nodepokemonapi
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3040:3306
+    networks:
+      - docker-service
+    links:
+      - mariadb
+
+  mariadb:
+    image: mariadb:latest
+    container_name: MariaDb
+    restart: always
+    ports:
+      - 3020:3306
+    environment:
+      - "MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes"
+    networks:
+      - docker-service
+
+  phpmyadin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: PhpMyAdmin
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+    restart: always
+    ports:
+      - 8080:80
+    networks:
+      - docker-service
+    links:
+      - mariadb
+
+networks:
+  docker-service:
+    driver: bridge
+
