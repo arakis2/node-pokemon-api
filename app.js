@@ -5,7 +5,7 @@ const sequelize = require('./src/db/sequelize')
 const cors = require('cors')
 
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3040
 
 
 app
@@ -17,7 +17,7 @@ app
 sequelize.initDb()
 
 app.get('/', (req, res) => {
-    res.json('Hello from Heroku !!!')
+    res.json('Hello from Pokemon API !!!')
 })
 
 require('./src/routes/findAllPokemons')(app)

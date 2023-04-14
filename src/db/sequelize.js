@@ -6,9 +6,8 @@ const bcrypt = require('bcryptjs')
 
 let sequelize
 if(process.env.NODE_ENV.trim() === 'production'){
-  sequelize = new Sequelize('pokedex', 'root', '', {
+  sequelize = new Sequelize('pokedex', '84v954vTWgCwYq', '8QYvRx7H24Y4qtm8PngM8', {
     host: 'mariadb',
-    port: 3020,
     dialect: 'mariadb',
     dialectOptions: {
       timezone: 'Etc/GMT-2',
@@ -27,11 +26,19 @@ if(process.env.NODE_ENV.trim() === 'production'){
 
 }
 
+
 const Pokemon = PokemonModel(sequelize, DataTypes)
 const User = UserModel(sequelize, DataTypes)
   
 const initDb = () => {
-  return sequelize.sync({force: true}).then(_ => {
+  try {
+    sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+
+  return sequelize.sync().then(_ => {
     pokemons.map(pokemon => {
       Pokemon.create({
         name: pokemon.name,
